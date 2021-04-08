@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DCF6BE"
+    tools:context=".QuizMultichoice">
+
+    <TextView
+        android:id="@+id/tf_text"
+        android:layout_width="386dp"
+        android:layout_height="152dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="250dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="20sp"
+        android:text="Question"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_true"
+        android:layout_width="147dp"
+        android:layout_height="108dp"
+        android:layout_column="0"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:text="Button"
+        android:textAllCaps="false"
+        app:backgroundTint="#4CAF50"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_false"
+        app:layout_constraintEnd_toStartOf="@+id/btn_false"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_quiz"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btn_false"
+        android:layout_width="147dp"
+        android:layout_height="108dp"
+        android:layout_column="1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="80dp"
+        android:layout_weight="1"
+        android:text="Button"
+        android:textAllCaps="false"
+        app:backgroundTint="#F44336"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_true"
+        app:layout_constraintTop_toBottomOf="@+id/tf_text" />
+
+
+    <ImageView
+        android:id="@+id/img_quiz"
+        android:layout_width="392dp"
+        android:layout_height="247dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/bkimages3"
+        app:layout_constraintBottom_toTopOf="@+id/btn_false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tf_text"
+        app:layout_constraintVertical_bias="0.746"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

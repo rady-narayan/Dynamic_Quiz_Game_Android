@@ -1,9 +1,11 @@
 package com.example.careconsortium;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,8 @@ import java.util.LinkedList;
 
 public class LevelListAdapter extends
         RecyclerView.Adapter<LevelListAdapter.WordViewHolder> {
+
+    private Context mContext;
 
 private final LinkedList<String> mWordList;
 private final LayoutInflater mInflater;
@@ -49,12 +53,20 @@ class WordViewHolder extends RecyclerView.ViewHolder
         // Notify the adapter, that the data has changed so it can
         // update the RecyclerView to display the data.
         mAdapter.notifyDataSetChanged();
+
+        //Intent intent = new Intent(view.getContext(), QuizMultichoice.class);
+        //view.getContext().startActivity(intent);
+       // Games currentGame = mAdapter.get(getAdapterPosition());
+        Intent detailIntent = new Intent(mContext, QuizMultichoice.class);
+        detailIntent.putExtra("level", element);
+        mContext.startActivity(detailIntent);
     }
 }
 
     public LevelListAdapter(Context context, LinkedList<String> wordList) {
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
+        mContext = context;
     }
 
     /**

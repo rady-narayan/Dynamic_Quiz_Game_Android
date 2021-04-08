@@ -9,6 +9,8 @@
         eros a enim faucibus mollis. Nunc placerat, est vitae vestibulum
         blandit, dolor diam fringilla tellus, eu euismod mauris neque
         at neque.</string>
+    <string name="next_text">next</string>
+    <string name="prev_text">previous</string>
 
 
     <string-array name="sports_titles">

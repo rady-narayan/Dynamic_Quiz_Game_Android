@@ -25,7 +25,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ABD878"
+        android:background="@drawable/gradient_background"
         tools:itemCount="8"
         tools:listitem="Level1" />
 </LinearLayout>
