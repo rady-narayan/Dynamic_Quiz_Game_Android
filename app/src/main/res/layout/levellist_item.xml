@@ -4,20 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="6dp">
+      <!--
+          <TextView
+              android:id="@+id/word"
+              android:theme="@style/word_title"
+              android:layout_height="match_parent"
+              android:layout_width="wrap_content" />
+      -->
+            <Button
+                android:id="@+id/word"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/custom_button"
+                android:text="Level" />
 
-    <TextView
-        android:id="@+id/word"
-        android:theme="@style/word_title"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content" />
-    <!--
-    <Button
-        android:id="@+id/word"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/custom_button"
-        android:text="Level" />
-        -->
 
 
 </LinearLayout>

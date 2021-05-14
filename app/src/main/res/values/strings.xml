@@ -14,17 +14,12 @@
 
 
     <string-array name="sports_titles">
-        <item>Caregiver Self Awareness</item>
+        <item>Caregiver Self Awareness aware</item>
         <item>Family Relations</item>
         <item>Quick Contacts</item>
         <item>In Home Care</item>
         <item>Cycling double</item>
         <item>Learn about golf</item>
-        <item>Running soccerrr</item>
-        <item>Basket Balllllll</item>
-        <item>Swimming meters</item>
-        <item>Table Tennis</item>
-        <item>Tennis training</item>
     </string-array>
 
     <string-array name="sports_info">
@@ -34,25 +29,15 @@
         <item>Here is some Bowling news!</item>
         <item>Here is some Cycling news!</item>
         <item>Here is some Golf news!</item>
-        <item>Here is some Running news!</item>
-        <item>Here is some Soccer news!</item>
-        <item>Here is some Swimming news!</item>
-        <item>Here is some Table Tennis news!</item>
-        <item>Here is some Tennis news!</item>
     </string-array>
 
 
     <array name="sports_images">
-        <item>@drawable/care</item>
-        <item>@drawable/care_two</item>
-        <item>@drawable/care_three</item>
-        <item>@drawable/donut_circle</item>
-        <item>@drawable/froyo_circle</item>
-        <item>@drawable/icecream_circle</item>
-        <item>@drawable/donut_circle</item>
-        <item>@drawable/froyo_circle</item>
-        <item>@drawable/icecream_circle</item>
-        <item>@drawable/donut_circle</item>
-        <item>@drawable/froyo_circle</item>
+        <item>@drawable/topic1</item>
+        <item>@drawable/topic2</item>
+        <item>@drawable/topic3</item>
+        <item>@drawable/topic4</item>
+        <item>@drawable/topic5</item>
+        <item>@drawable/topic6</item>
     </array>
 </resources>

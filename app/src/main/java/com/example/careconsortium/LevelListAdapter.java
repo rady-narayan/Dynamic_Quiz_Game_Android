@@ -22,7 +22,7 @@ private final LayoutInflater mInflater;
 
 class WordViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
-    public final TextView wordItemView;
+    public final Button wordItemView;
     final LevelListAdapter mAdapter;
 
     /**
@@ -35,9 +35,9 @@ class WordViewHolder extends RecyclerView.ViewHolder
      */
     public WordViewHolder(View itemView, LevelListAdapter adapter) {
         super(itemView);
-        wordItemView = itemView.findViewById(R.id.word);
+        wordItemView = (Button) itemView.findViewById(R.id.word);
         this.mAdapter = adapter;
-        itemView.setOnClickListener(this);
+        wordItemView.setOnClickListener(this);
     }
 
     @Override
@@ -49,10 +49,10 @@ class WordViewHolder extends RecyclerView.ViewHolder
         String element = mWordList.get(mPosition);
         // Change the word in the mWordList.
 
-        mWordList.set(mPosition, "Clicked! " + element);
+       // mWordList.set(mPosition, "Clicked! " + element);
         // Notify the adapter, that the data has changed so it can
         // update the RecyclerView to display the data.
-        mAdapter.notifyDataSetChanged();
+       // mAdapter.notifyDataSetChanged();
 
         //Intent intent = new Intent(view.getContext(), QuizMultichoice.class);
         //view.getContext().startActivity(intent);
@@ -60,6 +60,7 @@ class WordViewHolder extends RecyclerView.ViewHolder
         Intent detailIntent = new Intent(mContext, QuizMultichoice.class);
         detailIntent.putExtra("level", element);
         mContext.startActivity(detailIntent);
+
     }
 }
 

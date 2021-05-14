@@ -1,6 +1,7 @@
 package com.example.careconsortium;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
@@ -43,10 +43,10 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
         if (qtype == QuestionType.MCQ) {
             loadMcqPage();
-            NextQuestion(question_index, qtype);
+            LoadNextQuestion(question_index, qtype);
         } else if (qtype == QuestionType.TF) {
             loadTfPage();
-            NextQuestion(question_index, qtype);
+            LoadNextQuestion(question_index, qtype);
         } else if (qtype == QuestionType.MultiSelect) {
             setContentView(R.layout.play_multiselect);
             //multiselect_text = (TextView)findViewById(R.id.multiselect_text);
@@ -81,17 +81,19 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
     private void checkAnswer(String button_text) {
         if (button_text.equals(answer)) {
-            Toast.makeText(this, "You Are Correct", Toast.LENGTH_SHORT).show();
+            ResultPopup("Correct!");
+            //Toast.makeText(this, "You Are Correct", Toast.LENGTH_SHORT).show();
             correct++;
         } else
-            Toast.makeText(this, "That is wrong!", Toast.LENGTH_SHORT).show();
+            ResultPopup("Wrong!");
+            /*Toast.makeText(this, "That is wrong!", Toast.LENGTH_SHORT).show();
         question_index = random.nextInt(questionLength);
         qtype = question.getQuestionType(question_index);
         if (qtype == QuestionType.MCQ)
             loadMcqPage();
         if (qtype == QuestionType.TF)
             loadTfPage();
-        NextQuestion(question_index, qtype);
+        LoadNextQuestion(question_index, qtype);*/
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -134,7 +136,7 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
     private void GameOver() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizMultichoice.this);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
         alertDialogBuilder
                 .setMessage("Game Over! You got " + correct + " out of 5 correct")
                 .setCancelable(false)
@@ -154,7 +156,29 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private void NextQuestion(int num, QuestionType qtype) {
+    private void ResultPopup(String message) {
+        android.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
+        alertDialogBuilder
+                .setTitle(message + currentQuestionIndex + "/5 done")
+                .setCancelable(false)
+                .setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        question_index = random.nextInt(questionLength);
+                        qtype = question.getQuestionType(question_index);
+                        if (qtype == QuestionType.MCQ)
+                            loadMcqPage();
+                        if (qtype == QuestionType.TF)
+                            loadTfPage();
+                        LoadNextQuestion(question_index, qtype);
+                    }
+                });
+        alertDialogBuilder.show();
+
+
+    }
+
+    private void LoadNextQuestion(int num, QuestionType qtype) {
         if (qtype == QuestionType.MCQ) {
             tv_question.setText(question.getQuestion(num));
             btn_one.setText(question.getchoice1(num));
