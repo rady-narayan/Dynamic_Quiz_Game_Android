@@ -11,6 +11,8 @@
         at neque.</string>
     <string name="next_text">next</string>
     <string name="prev_text">previous</string>
+    <string name="upload_success">"Upload Successful"</string>
+    <string name="excel_error">"CSV is empty or has can empty line"</string>
 
 
     <string-array name="sports_titles">

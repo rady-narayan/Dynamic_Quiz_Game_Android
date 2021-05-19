@@ -59,7 +59,6 @@ class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GameViewHolder> {
 
             // Initialize the views.
             mTitleText = itemView.findViewById(R.id.title);
-            // mInfoText = itemView.findViewById(R.id.subTitle);
             mGamesImage = itemView.findViewById(R.id.gamesImage);
 
             // Set the OnClickListener to the entire view.

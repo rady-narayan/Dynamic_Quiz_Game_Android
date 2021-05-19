@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "497890077892",
+    "firebase_url": "https://quizapplayout-default-rtdb.firebaseio.com",
+    "project_id": "quizapplayout",
+    "storage_bucket": "quizapplayout.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497890077892:android:55a7f18b5449e9aa6e6d91",
+        "android_client_info": {
+          "package_name": "com.example.careconsortium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_50PgcrjKpLJ4-RGzwGnthAxJZ-UQUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497890077892:android:93fc5e209f1774a06e6d91",
+        "android_client_info": {
+          "package_name": "com.example.quizapplayout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_50PgcrjKpLJ4-RGzwGnthAxJZ-UQUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497890077892:android:86d1dfae505455bc6e6d91",
+        "android_client_info": {
+          "package_name": "com.google.firebase.example.fireeats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_50PgcrjKpLJ4-RGzwGnthAxJZ-UQUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497890077892-nvemk0g74fpjifigbel56tufq8akog34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

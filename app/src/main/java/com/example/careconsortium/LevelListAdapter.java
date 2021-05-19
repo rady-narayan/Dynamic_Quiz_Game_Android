@@ -58,7 +58,7 @@ class WordViewHolder extends RecyclerView.ViewHolder
         //view.getContext().startActivity(intent);
        // Games currentGame = mAdapter.get(getAdapterPosition());
         Intent detailIntent = new Intent(mContext, QuizMultichoice.class);
-        detailIntent.putExtra("level", element);
+        detailIntent.putExtra("level", mPosition + 1);
         mContext.startActivity(detailIntent);
 
     }

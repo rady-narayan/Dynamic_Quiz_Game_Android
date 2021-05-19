@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 
 public class LandingActivity extends AppCompatActivity {
 
-    Button button;
+    Button btnPlayGames, btnAdminPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,24 @@ public class LandingActivity extends AppCompatActivity {
     private void addListenerOnButton() {
 
         final Context context = this;
-        button = (Button) findViewById(R.id.btnPlayGames);
-        button.setOnClickListener(new View.OnClickListener() {
+        btnPlayGames = (Button) findViewById(R.id.btnPlayGames);
+        btnPlayGames.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("userID", "U001"); //Send user ID
+                startActivity(intent);
+
+            }
+
+        });
+
+        btnAdminPage = (Button) findViewById(R.id.btnLaunchAdmin);
+        btnAdminPage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, AdminPageActivity.class);
                 startActivity(intent);
 
             }

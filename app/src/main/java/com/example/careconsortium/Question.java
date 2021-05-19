@@ -2,6 +2,9 @@ package com.example.careconsortium;
 
 import android.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
 
     public Pair question_pairs[] = {
@@ -27,6 +30,15 @@ public class Question {
             //{"Hot", "Cold", "Tool to measure length", "Tool to measure temperature"},
             //{"Medicine for cold", "Valuable stones", "Aliens", "Microorganisms that can cause infection or sickness"}
     };
+
+    public List<String> getChoice(int i) {
+        List<String> myStringList = new ArrayList<String>(choices[i].length);
+        for (String s:choices[i]) {
+            myStringList.add( s );
+        }
+
+        return myStringList;
+    }
 
     public String correctAnswer[] = {
             "Blue",
