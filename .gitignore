@@ -14,3 +14,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+firebase-tools-instant-win.exe
+./firebase-tools-instant-win.exe
+/./firebase-tools-instant-win.exe
