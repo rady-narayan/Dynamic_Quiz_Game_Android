@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FirestoreUtil {
 
     private static FirebaseFirestore mFirestore;
-    private static final boolean sUseEmulators = BuildConfig.DEBUG;
+    private static final boolean sUseEmulators = false; //BuildConfig.DEBUG;
 
     public static FirebaseFirestore getDB() {
         // Get a reference to the restaurants collection
