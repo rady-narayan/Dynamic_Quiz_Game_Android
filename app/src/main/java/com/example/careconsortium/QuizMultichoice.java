@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.careconsortium.model.QuestionDB;
+import com.example.careconsortium.util.UserUtil;
 
 import java.util.List;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
     private int correct = 0;
     private int question_index = 0;
     private int level;
+    private String topic_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,8 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
         super.onCreate(savedInstanceState);
         Intent parentLevelIntent = getIntent();
-        level = parentLevelIntent.getIntExtra("level", 0);
+        level = parentLevelIntent.getIntExtra("level", 1);
+        topic_name = parentLevelIntent.getStringExtra("topic_name");
 
         question_index = parentLevelIntent.getIntExtra("question_number", 0);
         List<QuestionDB> list = GameLevelActivity.allQuestions.get(level);
@@ -79,7 +82,6 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
         btn_four.setOnClickListener(this);
 
         tv_question = (TextView) findViewById(R.id.tv_question);
-
     }
 
     private void loadTfPage() {
@@ -94,19 +96,11 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
 
     private void checkAnswer(String button_text) {
         if (button_text.equals(answer)) {
+            UserUtil.currentUser.addScore(25);
             ResultPopup("Correct!");
-            //Toast.makeText(this, "You Are Correct", Toast.LENGTH_SHORT).show();
             correct++;
         } else
             ResultPopup("Wrong!");
-            /*Toast.makeText(this, "That is wrong!", Toast.LENGTH_SHORT).show();
-        question_index = random.nextInt(questionLength);
-        qtype = question.getQuestionType(question_index);
-        if (qtype == QuestionType.MCQ)
-            loadMcqPage();
-        if (qtype == QuestionType.TF)
-            loadTfPage();
-        LoadNextQuestion(question_index, qtype);*/
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -146,6 +140,9 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
     }
 
     private void GameOver() {
+        UserUtil.currentUser.addScore(50);
+        UserUtil.updateLevelPlayed(topic_name, level);
+        UserUtil.update_user_to_database();
 
         android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
         alertDialogBuilder
@@ -164,13 +161,12 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
                     }
                 });
         alertDialogBuilder.show();
-
     }
 
     private void ResultPopup(String message) {
         android.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
         alertDialogBuilder
-                .setTitle(message + (question_index + 1) + "/3 done")
+                .setTitle(message + " " + (question_index + 1) + "/3 done")
                 .setCancelable(false)
                 .setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
                     @Override
@@ -188,8 +184,6 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
                     }
                 });
         alertDialogBuilder.show();
-
-
     }
 
     private void LoadNextQuestion(int num, String qtype) {

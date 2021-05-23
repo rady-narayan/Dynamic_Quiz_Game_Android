@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.careconsortium.model.QuestionDB;
 import com.example.careconsortium.model.Topics;
 import com.example.careconsortium.util.FirestoreUtil;
+import com.example.careconsortium.util.UserUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -55,6 +56,10 @@ public class GameLevelActivity extends AppCompatActivity {
         // Set the text from the Intent extra.
         sportsTitle.setText(topic_name);
 
+        String userid = getIntent().getStringExtra("userID");
+        if (userid != null)
+            UserUtil.initializeUser(userid);
+
         int imagePosition = getIntent().getIntExtra("image", 0);
         TypedArray gamesImageResources = getResources()
                 .obtainTypedArray(R.array.sports_images);
@@ -71,6 +76,7 @@ public class GameLevelActivity extends AppCompatActivity {
 
         // Create an adapter and supply the data to be displayed.
         mAdapter = new LevelListAdapter(this, mWordList);
+        mAdapter.topic_name = topic_name;
 
         // Connect the adapter with the recycler view.
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
@@ -113,8 +119,6 @@ public class GameLevelActivity extends AppCompatActivity {
             }
         });
 
-
-
         allQuestionsReady = 0;
         FirestoreUtil.getCollection("questions").whereEqualTo("topic_name", topic_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -139,7 +143,4 @@ public class GameLevelActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

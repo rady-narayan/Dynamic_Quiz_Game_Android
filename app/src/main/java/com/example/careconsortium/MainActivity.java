@@ -9,10 +9,12 @@ import com.example.careconsortium.model.QuestionDB;
 import com.example.careconsortium.model.Topics;
 import com.example.careconsortium.model.User;
 import com.example.careconsortium.util.FirestoreUtil;
+import com.example.careconsortium.util.UserUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,6 +26,8 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Games> mGamesData;
     private GamesAdapter mAdapter;
     private Query mQuery;
-    public User currentUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +56,9 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new GamesAdapter(this, mGamesData);
         mRecyclerView.setAdapter(mAdapter);
 
-        //initialize user
-        currentUser = new User();
-        currentUser.setUser_id(getIntent().getStringExtra("userID"));
-        FirestoreUtil.getCollection("user").add(currentUser);
-
         // Get the data.
         initializeData();
-
-
     }
-
 
     /**
      * Initialize the sports data from resources.
@@ -94,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //initialize user
+        UserUtil.initializeUser(getIntent().getStringExtra("userID"));
     }
 
     /**

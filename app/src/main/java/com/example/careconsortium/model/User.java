@@ -1,17 +1,24 @@
 package com.example.careconsortium.model;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class User {
     private String user_id;
-    private int current_score;
-    private Hashtable<String, Integer> levels_played = new Hashtable<String, Integer>();
+    private float current_score;
+    private HashMap<String, Integer> levels_played = new HashMap<String, Integer>();
 
     public User() {}
 
-    public User(String user_id, int current_score) {
+    public User(String user_id, float current_score, HashMap<String, Integer> hash) {
         this.user_id = user_id;
         this.current_score = current_score;
+        this.levels_played = hash;
+    }
+
+    public void addScore(int score) {
+        // 25 points for correct answer
+        // 50 points for finishing a level
+        current_score += score;
     }
 
     public void setUser_id(String user_id) {
@@ -22,19 +29,19 @@ public class User {
         return user_id;
     }
 
-    public void setCurrent_score(int current_score) {
+    public void setCurrent_score(float current_score) {
         this.current_score = current_score;
     }
 
-    public int getCurrent_score() {
+    public float getCurrent_score() {
         return current_score;
     }
 
-    public void setLevels_played(Hashtable<String, Integer> levels_played) {
+    public void setLevels_played(HashMap<String, Integer> levels_played) {
         this.levels_played = levels_played;
     }
 
-    public Hashtable<String, Integer> getLevels_played() {
+    public HashMap<String, Integer> getLevels_played() {
         return levels_played;
     }
 }
