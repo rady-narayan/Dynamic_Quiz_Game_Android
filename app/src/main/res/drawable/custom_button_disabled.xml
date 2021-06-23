@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle"
+    android:tint="@color/purple_200"
+    android:opticalInsetBottom="@dimen/cardview_compat_inset_shadow"
+    android:opticalInsetLeft="@dimen/material_emphasis_high_type">
+    <solid android:color="#48BB86FC"/>
+    <corners android:radius="999dp"/>
+
+
+</shape>

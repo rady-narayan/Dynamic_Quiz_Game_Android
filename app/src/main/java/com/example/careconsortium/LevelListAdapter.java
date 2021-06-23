@@ -2,6 +2,8 @@ package com.example.careconsortium;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class LevelListAdapter extends
         RecyclerView.Adapter<LevelListAdapter.WordViewHolder> {
     private Context mContext;
     public String topic_name;
+    private Drawable drawable;
 
     private final LinkedList<String> mWordList;
     private final LayoutInflater mInflater;
@@ -39,6 +42,8 @@ public class LevelListAdapter extends
         public WordViewHolder(View itemView, LevelListAdapter adapter) {
             super(itemView);
             wordItemView = (Button) itemView.findViewById(R.id.word);
+            //drawable=mContext.getResources().getDrawable(R.drawable.custom_button_disabled);
+            //wordItemView.setBackground(drawable);
             this.mAdapter = adapter;
             wordItemView.setOnClickListener(this);
         }
@@ -49,11 +54,12 @@ public class LevelListAdapter extends
             int mPosition = getLayoutPosition();
             int level = mPosition + 1;
 
-            if (UserUtil.checkLevelPlayed(topic_name, level)
-                    || UserUtil.checkLevelLocked(topic_name, level))
+            if (UserUtil.checkLevelLocked(topic_name, level))
                 return;
 
-            Intent detailIntent = new Intent(mContext, QuizMultichoice.class);
+
+
+            Intent detailIntent = new Intent(mContext, QuizActivity.class);
             detailIntent.putExtra("level", level);
             detailIntent.putExtra("topic_name", topic_name);
             mContext.startActivity(detailIntent);
@@ -109,6 +115,14 @@ public class LevelListAdapter extends
         String mCurrent = mWordList.get(position);
         // Add the data to the view holder.
         holder.wordItemView.setText(mCurrent);
+
+        // Get the position of the item that was clicked.
+
+        int level = position + 1;
+        if (UserUtil.checkLevelLocked(topic_name, level))    // || UserUtil.checkLevelPlayed(topic_name, level)
+            holder.wordItemView.setText( mCurrent +"\n\uD83D\uDD12" );
+       // else
+         //   holder.wordItemView.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     /**

@@ -52,7 +52,7 @@ public class GameLevelActivity extends AppCompatActivity {
 
         // Initialize the views.
         TextView sportsTitle = findViewById(R.id.titleDetail);
-        topic_name = getIntent().getStringExtra("title");
+        topic_name = getIntent().getStringExtra("topic_name");
         // Set the text from the Intent extra.
         sportsTitle.setText(topic_name);
 

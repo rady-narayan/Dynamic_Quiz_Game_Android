@@ -13,6 +13,7 @@
     <string name="prev_text">previous</string>
     <string name="upload_success">"Upload Successful"</string>
     <string name="excel_error">"CSV is empty or has can empty line"</string>
+    <string name="_10_10">10/10</string>
 
 
     <string-array name="sports_titles">

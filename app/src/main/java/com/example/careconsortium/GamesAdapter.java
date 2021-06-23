@@ -79,7 +79,7 @@ class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GameViewHolder> {
         public void onClick(View view) {
             Games currentGame = mGamesData.get(getAdapterPosition());
             Intent detailIntent = new Intent(mContext, GameLevelActivity.class);
-            detailIntent.putExtra("title", currentGame.getTitle());
+            detailIntent.putExtra("topic_name", currentGame.getTitle());
             detailIntent.putExtra("image", getAdapterPosition());
             mContext.startActivity(detailIntent);
         }

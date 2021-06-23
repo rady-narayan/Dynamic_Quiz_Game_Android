@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +20,10 @@ import com.example.careconsortium.util.UserUtil;
 import java.util.List;
 import java.util.Random;
 
-public class QuizMultichoice extends AppCompatActivity implements View.OnClickListener {
+public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_one, btn_two, btn_three, btn_four, btn_true, btn_false;
-    TextView tv_question, tf_text, multiselect_text;
+    TextView mcq_text, tf_text, textLevel,textScore, textProgress;
+
 
     private QuestionDB questionDB;
 
@@ -56,7 +59,6 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
         // get type of the question to be loaded next
         qtype = questionDB.getQuestion_type();
 
-        //GameLevelActivity.allQuestions.get(level);
 
         if (qtype.equals("MCQ")) {
             loadMcqPage();
@@ -64,10 +66,8 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
         } else if (qtype.equals("TF")) {
             loadTfPage();
             LoadNextQuestion(question_index, qtype);
-        } else if (qtype.equals("MultiSelect")) {
-            setContentView(R.layout.play_multiselect);
-            //multiselect_text = (TextView)findViewById(R.id.multiselect_text);
         }
+
     }
 
     private void loadMcqPage() {
@@ -81,12 +81,18 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
         btn_four = (Button) findViewById(R.id.btn_four);
         btn_four.setOnClickListener(this);
 
-        tv_question = (TextView) findViewById(R.id.tv_question);
+        mcq_text = (TextView) findViewById(R.id.mcq_text);
+        textLevel = (TextView) findViewById(R.id.textLevel_mcq);
+        textProgress = (TextView) findViewById(R.id.textProgress_mcq);
+        textScore = (TextView) findViewById(R.id.textScore_mcq);
     }
 
     private void loadTfPage() {
         setContentView(R.layout.play_tf);
         tf_text = (TextView) findViewById(R.id.tf_text);
+        textLevel = (TextView) findViewById(R.id.textLevel);
+        textProgress = (TextView) findViewById(R.id.textProgress);
+        textScore = (TextView) findViewById(R.id.textScore);
 
         btn_true = (Button) findViewById(R.id.btn_true);
         btn_true.setOnClickListener(this);
@@ -97,10 +103,10 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
     private void checkAnswer(String button_text) {
         if (button_text.equals(answer)) {
             UserUtil.currentUser.addScore(25);
-            ResultPopup("Correct!");
+            ResultPopup("Correct! \uD83D\uDC4F");
             correct++;
         } else
-            ResultPopup("Wrong!");
+            ResultPopup("Wrong! \uD83D\uDE41 Correct answer is : \n" + answer);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -140,18 +146,19 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
     }
 
     private void GameOver() {
+
         UserUtil.currentUser.addScore(50);
         UserUtil.updateLevelPlayed(topic_name, level);
         UserUtil.update_user_to_database();
 
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
+        /* android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(QuizActivity.this, R.style.AlertDialogTheme);
         alertDialogBuilder
                 .setMessage("Game Over! You got " + correct + " out of 3 correct")
                 .setCancelable(false)
                 .setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(getApplicationContext(), QuizMultichoice.class));
+                        startActivity(new Intent(getApplicationContext(), QuizActivity.class));
                     }
                 })
                 .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
@@ -160,13 +167,30 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
                         System.exit(0);
                     }
                 });
-        alertDialogBuilder.show();
+        alertDialogBuilder.show(); */
+        new CountDownTimer(2000, 1000) {
+            public void onFinish() {
+                // When timer is finished
+                // Execute your code here
+                Intent gameOverIntent = new Intent(QuizActivity.this, GameOverActivity.class);
+                gameOverIntent.putExtra("level", level);
+                gameOverIntent.putExtra("topic_name", topic_name);
+                gameOverIntent.putExtra("correct", correct);
+                gameOverIntent.putExtra("score", String.valueOf((int)UserUtil.currentUser.getCurrent_score()));
+                QuizActivity.this.startActivity(gameOverIntent);
+            }
+
+            public void onTick(long millisUntilFinished) {
+                // millisUntilFinished    The amount of time until finished.
+            }
+        }.start();
+
     }
 
     private void ResultPopup(String message) {
-        android.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizMultichoice.this, R.style.AlertDialogTheme);
+        android.app.AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizActivity.this, R.style.AlertDialogTheme);
         alertDialogBuilder
-                .setTitle(message + " " + (question_index + 1) + "/3 done")
+                .setTitle(message)
                 .setCancelable(false)
                 .setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
                     @Override
@@ -183,12 +207,13 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
                         LoadNextQuestion(question_index, qtype);
                     }
                 });
+
         alertDialogBuilder.show();
     }
 
     private void LoadNextQuestion(int num, String qtype) {
         if (qtype.equals("MCQ")) {
-            tv_question.setText(questionDB.getQuestion_text());
+            mcq_text.setText(questionDB.getQuestion_text());
             btn_one.setText(questionDB.getChoices().get(0));
             btn_two.setText(questionDB.getChoices().get(1));
             btn_three.setText(questionDB.getChoices().get(2));
@@ -198,11 +223,17 @@ public class QuizMultichoice extends AppCompatActivity implements View.OnClickLi
         }
 
         if (qtype.equals("TF")) {
+
             tf_text.setText(questionDB.getQuestion_text());
             btn_true.setText(questionDB.getChoices().get(0));
             btn_false.setText(questionDB.getChoices().get(1));
 
             answer = questionDB.getAnswer();
         }
+        textLevel.setText("Level " + level + ":");
+        String progress = question_index + 1+ "/3";
+        textProgress.setText(progress);
+        String score = "⭐ Score :" + String.valueOf((int)UserUtil.currentUser.getCurrent_score());
+        textScore.setText(score);
     }
 }
